@@ -31,6 +31,9 @@ app.post("/add", function (req, res) {
 	// Example of form data for adding a new user
 	// var data = `{"email":"${req.body.user.email}","firstName":"${req.body.user.firstName}","id":"${req.body.user.id}","lastName":"${req.body.user.lastName}","picture":"${req.body.user.picture}","title":"${req.body.user.title}"}`;
 	// Your code goes here
+
+	
+
 });
 
 // GET Directory of employees, returns an array of objects from the server.
