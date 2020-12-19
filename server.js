@@ -36,7 +36,29 @@ app.post("/add", function (req, res) {
 // GET Directory of employees, returns an array of objects from the server.
 app.get("/directory", function (req, res) {
 	// Modify this route and the views
-	res.render("pages/directory");
+	var config = {
+		method: 'get',
+		url: 'https://spa-proje-default-rtdb.firebaseio.com/.json',
+		headers: { }
+	  };
+	  
+	  axios(config)
+	  .then(function (response) {
+		let responseArray = Object.entries(response.data.data)
+		//console.log(responseArray);
+		return responseArray;
+	  })
+	  .then(employees => {
+		res.render("pages/directory", {
+			employees: employees,
+		});
+	  })
+	  .catch(function (error) {
+		console.log(error);
+	  });
+	  
+
+	
 });
 
 // GET static about page
@@ -47,7 +69,35 @@ app.get("/about", function (req, res) {
 // Single Employee
 // "Render" the person view here!
 app.get("/directory/:uid", function (req, res) {
-	res.send("Render a single employee by id");
+	//console.log(req)
+	let id = req.params.uid;
+	var config = {
+		method: 'get',
+		url: `https://spa-proje-default-rtdb.firebaseio.com/data/${id}.json`,
+		headers: { }
+	  };
+	  
+	  axios(config)
+	  .then(function (response) {
+		
+		console.log(response.data);
+		let responseArray = Object.entries(response.data)
+		//console.log(responseArray);
+		return response.data;
+	  })
+	  .then(employee => {
+		res.render("pages/person", {
+			employee: employee,
+		});
+	  })
+	  .catch(function (error) {
+		console.log(error);
+	  });
+
+	//   res.render("pages/person", {
+	// 	employee: employee,
+	//   })
+
 });
 
 // GET Form to add new employee (GET the form first, then the forms "submit" button handles the POST request.

@@ -1,5 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Your code goes here. It should look very similar to other pages hint hint. You'd just need to modify the main content to display a single person.  -->
-</body>
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="container">
+		<header><%- include('../partials/header'); %></header>
+
+		<main>
+			<div class="container">
+				<h1>Employee Details</h1>
+			
+
+          <!-- YOUR EJS OR HANDLEBARS TEMPLATE LITERALS GO HERE -->
+             
+          <div class = 'col-3 p-1 m-2 bg-light'>
+				<img src="<%= employee.picture %>">
+				<%= employee.firstName %>
+				<%= employee.lastName %>
+				<%= employee.email %>
+
+			</div>
+			
+		   <!-- Try mocking up some Bootstrap cards or columns with some hard coded data to get an idea of how your templates should look. -->
+		   					
+			</div>
+		</main>
+
+		<footer><%- include('../partials/footer'); %></footer>
+	</body>
 </html>

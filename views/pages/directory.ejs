@@ -27,12 +27,22 @@
           <p>Try mocking up some Bootstrap cards or columns with some hard coded data to get an idea of how your templates should look. </p>
         </div>
 				<div class="row justify-content-between">
-          <img src="/images/example.png" class="img-fluid">
 
           <!-- YOUR EJS OR HANDLEBARS TEMPLATE LITERALS GO HERE -->
+		  <% employees.forEach(function(id){%>
+			<div class = 'col-3 p-1 m-2 bg-light'>
+				<img src="<%= id[1].picture %>">
+				<%= id[1].firstName %>
+				<%= id[1].lastName %>
+				<%= id[1].email %>
+				<a href="/directory/<%= id[0]%>">View Profile</a>
 
-           <!-- Try mocking up some Bootstrap cards or columns with some hard coded data to get an idea of how your templates should look. -->
+			</div>
+			<% }); %>
+		   <!-- Try mocking up some Bootstrap cards or columns with some hard coded data to get an idea of how your templates should look. -->
+		   	
 				</div>
+				
 			</div>
 		</main>
 
