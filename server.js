@@ -25,12 +25,38 @@ app.get("/", function (req, res) {
 });
 
 // POST a new employee route
-app.post("/add", function (req, res) {
+app.post("/create_employee", function (req, res) {
 	// Useful for console logging the form inputs
 	// console.log(console.log(req.body))
 	// Example of form data for adding a new user
 	// var data = `{"email":"${req.body.user.email}","firstName":"${req.body.user.firstName}","id":"${req.body.user.id}","lastName":"${req.body.user.lastName}","picture":"${req.body.user.picture}","title":"${req.body.user.title}"}`;
 	// Your code goes here
+
+	var data = `{"email":"${req.body.user.email}","firstName":"${req.body.user.firstName}","id":"${req.body.user.id}","lastName":"${req.body.user.lastName}","picture":"${req.body.user.picture}","title":"${req.body.user.title}"}`;
+
+	var config = {
+	method: 'post',
+	url: 'https://spa-proje-default-rtdb.firebaseio.com/data.json',
+	headers: { 
+		'Content-Type': 'text/plain'
+	},
+	data : data
+	};
+
+	axios(config)
+	.then(function (response) {
+	console.log(JSON.stringify(response.data));
+	})
+	.catch(function (error) {
+	console.log(error);
+	});
+
+	res.redirect("/directory");
+
+
+
+
+
 });
 
 // GET Directory of employees, returns an array of objects from the server.
@@ -102,11 +128,41 @@ app.get("/directory/:uid", function (req, res) {
 
 // GET Form to add new employee (GET the form first, then the forms "submit" button handles the POST request.
 
-app.get("/add", function (req, res) {
+app.get("/create_employee", function (req, res) {
 	res.render("pages/create_employee");
+	
 });
+
+app.delete('/directory', function (req, res) {
+	var data = '';
+
+	let id = req.params.uid;
+
+	console.log(id)
+	var config = {
+	method: 'delete',
+	url: `https://spa-proje-default-rtdb.firebaseio.com/data/${id}.json`,
+	headers: { 
+		'Authorization': 'Basic a2lkX1N5MGVaQXJzRDo3NDBjYjAzYTc1N2E0MmM1YTUyY2RjOTQwMzJlZTBlZA==', 
+		'app-id': '5fd8074beaed33cd8156ee58'
+	},
+	data : data
+	};
+
+	axios(config)
+	.then(function (response) {
+	console.log(JSON.stringify(response.data));
+	})
+	.catch(function (error) {
+	console.log(error);
+	});
+
+	
+})
 
 // Express's .listen method is the final part of Express that fires up the server on the assigned port and starts "listening" for request from the app! (boilerplate code from the docs)
 
 app.listen(2001);
 console.log("Port 2001 is open");
+
+

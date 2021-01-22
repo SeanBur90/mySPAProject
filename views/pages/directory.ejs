@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script type="text/javascript" src="../../server.js"></script>
 		<%- include('../partials/head'); %>
 	</head>
 	<body class="container">
@@ -36,6 +37,8 @@
 				<%= id[1].lastName %>
 				<%= id[1].email %>
 				<a href="/directory/<%= id[0]%>">View Profile</a>
+				<a data-method="delete" href="/directory" >Delete</a>
+
 
 			</div>
 			<% }); %>
